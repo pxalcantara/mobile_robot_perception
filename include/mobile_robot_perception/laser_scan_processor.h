@@ -7,7 +7,7 @@
 #include <sensor_msgs/LaserScan.h>
 
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include <string>
 #include <vector>
 
@@ -15,11 +15,13 @@ namespace mobile_robot_perception {
 
 class ScanSectorMeasurements {
  public:
-  ScanSectorMeasurements (const std::vector<float>& _scan_measurements, float _angle_increment);
+  ScanSectorMeasurements(const std::vector<float>& _scan_measurements, float _angle_increment);
 
-  ~ScanSectorMeasurements ();
+  ~ScanSectorMeasurements();
 
-  float getInclination ();
+  float getInclination();
+
+  float getInclinationDegree();
 
   void setScanMeasurements(const std::vector<float>& _scan_measurements);
 

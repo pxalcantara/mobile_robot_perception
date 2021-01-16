@@ -12,13 +12,11 @@ struct ScanSectorMeasurementTest : public ::testing::Test {
 
   ScanSectorMeasurementTest() :
   angle_increment(1),
-  scan_measurements(10), 
+  scan_measurements(1), 
   scanclass(scan_measurements, angle_increment) {
   }
 
   void SetUp() override {
-    scan_measurements = {1,2,3,4,5,6,7,8,9,10};
-    scanclass.setScanMeasurements(scan_measurements);
   }
 
   void TearDown() override {}
@@ -28,9 +26,35 @@ struct ScanSectorMeasurementTest : public ::testing::Test {
 
 };
 
-TEST_F(ScanSectorMeasurementTest, getInclinationTest) {
-  float inclination = scanclass.getInclination(); 
-  EXPECT_EQ(0, inclination);
+TEST_F(ScanSectorMeasurementTest, get0InclinationTest) {
+  std::vector<float> scan_measurements(5,1);  
+  scanclass.setScanMeasurements(scan_measurements); 
+  EXPECT_EQ(0, scanclass.getInclination());
+  EXPECT_EQ(0, scanclass.getInclinationDegree());
+}
+
+TEST_F(ScanSectorMeasurementTest, get45InclinationTest) {
+  std::vector<float> scan_measurements = {1,2,3,4,5,6,7,8,9,10,11,12,13};  
+  scanclass.setScanMeasurements(scan_measurements);
+  EXPECT_FLOAT_EQ(0.785398, scanclass.getInclination());
+  EXPECT_FLOAT_EQ(45, scanclass.getInclinationDegree());
+}
+
+TEST_F(ScanSectorMeasurementTest, getMinus45InclinationTest) {
+  std::vector<float> scan_measurements = {11,10,9,8,7,6,5};  
+  scanclass.setScanMeasurements(scan_measurements);
+  EXPECT_FLOAT_EQ(-0.785398, scanclass.getInclination());
+  EXPECT_FLOAT_EQ(-45, scanclass.getInclinationDegree());
+}
+
+TEST_F(ScanSectorMeasurementTest, getMinus30InclinationTest) {
+  std::vector<float> scan_measurements;
+  for (int i = 1; i < 15; i++) {
+    scan_measurements.push_back(i * tan(-0.523599));
+  }  
+  scanclass.setScanMeasurements(scan_measurements);
+  EXPECT_NEAR(-0.523599, scanclass.getInclination(), 0.001);
+  EXPECT_NEAR(-30, scanclass.getInclinationDegree(), 0.001);
 }
 
 int main(int argc, char **argv) {
