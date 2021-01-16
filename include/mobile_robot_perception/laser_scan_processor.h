@@ -23,11 +23,17 @@ class ScanSectorMeasurements {
 
   float getInclinationDegree();
 
+  float getMax();
+
+  float getMin();
+
   void setScanMeasurements(const std::vector<float>& _scan_measurements);
 
  private:
   std::vector<float> scan_measurements_;
   float angle_increment_;
+  float max_measurement_;
+  float min_measurement_;
 
 };
 

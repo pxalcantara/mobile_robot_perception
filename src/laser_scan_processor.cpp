@@ -20,6 +20,16 @@ float ScanSectorMeasurements::getInclinationDegree() {
   return getInclination() * 180 / M_PI;
 }
 
+float ScanSectorMeasurements::getMax() {
+  max_measurement_ = *max_element(scan_measurements_.begin(), scan_measurements_.end());
+  return max_measurement_;
+}
+
+float ScanSectorMeasurements::getMin() {
+  min_measurement_ = *min_element(scan_measurements_.begin(), scan_measurements_.end());
+  return min_measurement_;
+}
+
 void ScanSectorMeasurements::setScanMeasurements(const std::vector<float>& _scan_measurements) {
   scan_measurements_ = _scan_measurements;
 }

@@ -57,6 +57,26 @@ TEST_F(ScanSectorMeasurementTest, getMinus30InclinationTest) {
   EXPECT_NEAR(-30, scanclass.getInclinationDegree(), 0.001);
 }
 
+TEST_F(ScanSectorMeasurementTest, getMaxTest) {
+  std::vector<float> scan_measurements1 = {11.6, 10.4, 9, 8, 7, 6, 5};  
+  std::vector<float> scan_measurements2 = {11.6, 10.4, 9, 80, 77, 56, 6, 500.93};  
+  scanclass.setScanMeasurements(scan_measurements1);
+  EXPECT_FLOAT_EQ(11.6, scanclass.getMax());
+
+  scanclass.setScanMeasurements(scan_measurements2);
+  EXPECT_FLOAT_EQ(500.93, scanclass.getMax());
+}
+
+TEST_F(ScanSectorMeasurementTest, getMinTest) {
+  std::vector<float> scan_measurements1 = {11.6, 10.4, 9, 8, 7, 6, 0.5};  
+  std::vector<float> scan_measurements2 = {-11.6, -10.4, 9, 80, 77, -56.6, 6, 500.93};  
+  scanclass.setScanMeasurements(scan_measurements1);
+  EXPECT_FLOAT_EQ(0.5, scanclass.getMin());
+
+  scanclass.setScanMeasurements(scan_measurements2);
+  EXPECT_FLOAT_EQ(-56.6, scanclass.getMin());
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
 
