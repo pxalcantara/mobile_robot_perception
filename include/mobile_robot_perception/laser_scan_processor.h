@@ -1,4 +1,3 @@
-
 #ifndef MOBILE_ROBOT_PERCEPTION_LASER_SCAN_PROCESSOR_H_
 #define MOBILE_ROBOT_PERCEPTION_LASER_SCAN_PROCESSOR_H_
 
@@ -13,31 +12,17 @@
 
 namespace mobile_robot_perception { 
 
-class ScanSectorMeasurements {
+class LaserScanProcessor {
  public:
-  ScanSectorMeasurements(const std::vector<float>& _scan_measurements, float _angle_increment);
+  LaserScanProcessor(const sensor_msgs::LaserScan& _scan);
 
-  ~ScanSectorMeasurements();
+  ~LaserScanProcessor();
 
-  float getInclination();
-
-  float getInclinationDegree();
-
-  float getMax();
-
-  float getMin();
-
-  void setScanMeasurements(const std::vector<float>& _scan_measurements);
+  // ScanSectorMeasurements getSector(int _sector_origin, int _sector_size);
 
  private:
-  std::vector<float> scan_measurements_;
-  float angle_increment_;
-  float max_measurement_;
-  float min_measurement_;
-
+  sensor_msgs::LaserScan scan_;
 };
-
-
 
 }; // namespace mobile_robot_perception
 

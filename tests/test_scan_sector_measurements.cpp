@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <mobile_robot_perception/laser_scan_processor.h>
+#include <mobile_robot_perception/scan_sector_measurement.h>
 
 struct ScanSectorMeasurementTest : public ::testing::Test {
   

@@ -34,12 +34,15 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+add_library(scan_sector_measurement src/scan_sector_measurement.cpp)
+target_link_libraries(scan_sector_measurement ${catkin_LIBRARIES})
+
 add_library(laser_scan_processor src/laser_scan_processor.cpp)
 target_link_libraries(laser_scan_processor ${catkin_LIBRARIES})
 
 ## Mark libraries for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_libraries.html
-install(TARGETS laser_scan_processor
+install(TARGETS scan_sector_measurement laser_scan_processor
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
@@ -54,7 +57,7 @@ install(DIRECTORY include/${PROJECT_NAME}/
 
 if(CATKIN_ENABLE_TESTING)
   catkin_add_gtest(test_scan_sector_measurements tests/test_scan_sector_measurements.cpp)
-  target_link_libraries(test_scan_sector_measurements ${catkin_LIBRARIES} laser_scan_processor)
+  target_link_libraries(test_scan_sector_measurements ${catkin_LIBRARIES} scan_sector_measurement)
 endif()
 
 ## Declare a C++ library
