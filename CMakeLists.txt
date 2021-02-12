@@ -38,7 +38,7 @@ add_library(scan_sector_measurement src/scan_sector_measurement.cpp)
 target_link_libraries(scan_sector_measurement ${catkin_LIBRARIES})
 
 add_library(laser_scan_processor src/laser_scan_processor.cpp)
-target_link_libraries(laser_scan_processor ${catkin_LIBRARIES})
+target_link_libraries(laser_scan_processor ${catkin_LIBRARIES} scan_sector_measurement) 
 
 ## Mark libraries for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_libraries.html

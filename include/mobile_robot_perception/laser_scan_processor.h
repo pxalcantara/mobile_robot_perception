@@ -3,6 +3,7 @@
 
 #include <ros/ros.h>
 
+#include <mobile_robot_perception/scan_sector_measurement.h>
 #include <sensor_msgs/LaserScan.h>
 
 #include <iostream>
@@ -18,10 +19,13 @@ class LaserScanProcessor {
 
   ~LaserScanProcessor();
 
-  // ScanSectorMeasurements getSector(int _sector_origin, int _sector_size);
+  ScanSectorMeasurements getSector(int _sector_origin, int _sector_size);
+
+  int angleToIndex(float _angle);
 
  private:
   sensor_msgs::LaserScan scan_;
+  float angle_range_;
 };
 
 }; // namespace mobile_robot_perception
