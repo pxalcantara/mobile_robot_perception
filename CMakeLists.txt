@@ -58,6 +58,9 @@ install(DIRECTORY include/${PROJECT_NAME}/
 if(CATKIN_ENABLE_TESTING)
   catkin_add_gtest(test_scan_sector_measurements tests/test_scan_sector_measurements.cpp)
   target_link_libraries(test_scan_sector_measurements ${catkin_LIBRARIES} scan_sector_measurement)
+
+  catkin_add_gtest(test_laser_scan_processor tests/test_laser_scan_processor.cpp)
+  target_link_libraries(test_laser_scan_processor ${catkin_LIBRARIES} laser_scan_processor)
 endif()
 
 ## Declare a C++ library
