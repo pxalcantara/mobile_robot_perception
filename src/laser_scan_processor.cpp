@@ -22,7 +22,14 @@ namespace mobile_robot_perception {
   }
 
   int LaserScanProcessor::angleToIndex(float _angle) {
-    int index = (_angle + (angle_range_ / 2)) / scan_.angle_increment;
+    // trunc the _angle value to get just 2 decimals;
+    float angle = std::truncf(100 * _angle) / 100;
+    
+    if ((angle ) < scan_.angle_min || (angle ) > scan_.angle_max) {
+      return -1;
+    }
+
+    int index = (angle + (angle_range_ / 2)) / scan_.angle_increment;
     return index;
   }
 } 

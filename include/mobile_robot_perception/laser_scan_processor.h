@@ -31,8 +31,8 @@ class LaserScanProcessor {
   /**
    * @brief Get a sector of the LaserScan msgs.
    *
-   * @param _sector_origin The origin angle, in degrees, of the sector. The origin is the center of the sector
-   * @param _sector_size The width, in degrees, of the sector. Considering the _sector_origin as reference, the 
+   * @param _sector_origin The origin angle, in radian, of the sector. The origin is the center of the sector
+   * @param _sector_size The width, in radian, of the sector. Considering the _sector_origin as reference, the 
    * sector has +(_sector_size / 2) and -(_sector_size / 2) considering the Righ Hand reference.
    * 
    * @return A ScanSectorMeasurement object.
@@ -40,14 +40,15 @@ class LaserScanProcessor {
   ScanSectorMeasurements getSector(float _sector_origin, float _sector_size);
 
   /**
-   * @brief Convert an angle, in degrees, into an index of the measurements array.
+   * @brief Convert an angle, in radian, into an index of the measurements array.
    * 
    * To make this convertion, the angle_increment of the LaserScan msg is used. If the calculation doesn't give an 
-   * integer value, the function will return the next bigger integer.
+   * integer value, the function will return the previews integer. The _angle is truncated to 2 decimals
    *
    * @param _angle Angle to be converted into the array index.
    * 
    * @return The array index.
+   * @retval -1 if the angle is out of the angle range
    */
   int angleToIndex(float _angle);
 
