@@ -10,7 +10,7 @@ namespace mobile_robot_perception {
 
   LaserScanProcessor::~LaserScanProcessor() {}
 
-  ScanSectorMeasurements LaserScanProcessor::getSector(int _sector_origin_angle, int _sector_size) {
+  ScanSectorMeasurements LaserScanProcessor::getSector(float _sector_origin_angle, float _sector_size) {
     std::vector<float> sector_measurements = {};
 
     for (int i = 0; i < _sector_size; i++) {
