@@ -16,21 +16,17 @@ namespace mobile_robot_perception {
     int center_position = this->angleToIndex(_sector_origin_angle);
 
     float start_angle = _sector_origin_angle - (_sector_size/2);
-    if (start_angle > scan_.angle_max) {
-      start_angle = scan_.angle_max;
+    if (start_angle < scan_.angle_min) {
+      start_angle = scan_.angle_min;
     }
 
     float final_angle = _sector_origin_angle + (_sector_size/2);
-    if (final_angle < scan_.angle_min) {
-      final_angle = scan_.angle_min;
+    if (final_angle > scan_.angle_max) {
+      final_angle = scan_.angle_max;
     }
 
     int start_position = this->angleToIndex(start_angle);
     int final_position = this->angleToIndex(final_angle);
-
-    std::cout << " center position: " << center_position << std::endl;
-    std::cout << " start position: " << start_position << std::endl;
-    std::cout << " final position: " << final_position << std::endl;
 
     for (int i = start_position; i < final_position; i++) {
       sector_measurements.push_back(scan_.ranges[i]);

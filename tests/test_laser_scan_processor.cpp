@@ -46,10 +46,12 @@ TEST_F(LaserScanProcessorTest, angleToIndexTest) {
 
 TEST_F(LaserScanProcessorTest, getSectorTest) {
   
+  // 0.79 radian = ~45 degrees
   mobile_robot_perception::ScanSectorMeasurements scan_sector = scan_processor_ptr_->getSector(0, 0.79);
 
   EXPECT_EQ(0, scan_sector.getInclination());
   EXPECT_EQ(1, scan_sector.getMax());
+  EXPECT_EQ(25, scan_sector.getSize());
 
   int ranges_pos = 42;
   float scan = 1;
@@ -64,10 +66,26 @@ TEST_F(LaserScanProcessorTest, getSectorTest) {
 
   scan_sector = scan_processor_ptr_->getSector(0, 0.5);
   
+  EXPECT_NEAR(0.785398, scan_sector.getInclination(), 0.0001);
   EXPECT_NEAR(1.4396, scan_sector.getMax(), 0.0001);
   EXPECT_EQ(1, scan_sector.getMin());
-  EXPECT_NEAR(0.785398, scan_sector.getInclination(), 0.0001);
+  EXPECT_EQ(15, scan_sector.getSize());
     
+}
+
+TEST_F(LaserScanProcessorTest, getSectorLimitsTest) {
+
+  mobile_robot_perception::ScanSectorMeasurements scan_sector = scan_processor_ptr_->getSector(-PI/2, 0.79);
+
+  EXPECT_EQ(12, scan_sector.getSize());
+
+  scan_sector = scan_processor_ptr_->getSector(-PI/2 + 2*0.0314, 0.79);
+
+  EXPECT_EQ(14, scan_sector.getSize());
+
+  scan_sector = scan_processor_ptr_->getSector(PI/2 , 0.5);
+
+  EXPECT_EQ(8, scan_sector.getSize());
 }
 
 
