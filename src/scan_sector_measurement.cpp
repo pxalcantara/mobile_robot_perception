@@ -11,9 +11,9 @@ ScanSectorMeasurements::~ScanSectorMeasurements() {}
 float ScanSectorMeasurements::getInclination() {
   float linear_distance = (scan_measurements_.size() - 1) * angle_increment_;
  
-  float angular = std::atan2((scan_measurements_.back() - scan_measurements_.front()), linear_distance);
+  float angular_inclination = std::atan2((scan_measurements_.back() - scan_measurements_.front()), linear_distance);
 
-  return angular;
+  return angular_inclination;
 }
 
 float ScanSectorMeasurements::getInclinationDegree() {

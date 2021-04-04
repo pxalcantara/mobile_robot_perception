@@ -27,6 +27,8 @@ class ScanSectorMeasurements {
 
   float getMin();
 
+
+
   void setScanMeasurements(const std::vector<float>& _scan_measurements);
 
  private:
@@ -34,7 +36,7 @@ class ScanSectorMeasurements {
   float angle_increment_;
   float max_measurement_;
   float min_measurement_;
-
+  
 };
 
 }; // namespace mobile_robot_perception

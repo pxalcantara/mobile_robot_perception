@@ -38,6 +38,12 @@ TEST_F(ScanSectorMeasurementTest, get45InclinationTest) {
   scanclass.setScanMeasurements(scan_measurements);
   EXPECT_FLOAT_EQ(0.785398, scanclass.getInclination());
   EXPECT_FLOAT_EQ(45, scanclass.getInclinationDegree());
+
+  scan_measurements = {1, 1.0314, 1.0628, 1.0942, 1.1256, 1.157, 1.1884,
+                       1.2198, 1.2512, 1.2826, 1.314, 1.3454, 1.3768, 1.4082, 1.4396};
+  mobile_robot_perception::ScanSectorMeasurements scan2(scan_measurements, 0.0314);
+  EXPECT_NEAR(0.785398, scanclass.getInclination(), 0.0001);
+
 }
 
 TEST_F(ScanSectorMeasurementTest, getMinus45InclinationTest) {
