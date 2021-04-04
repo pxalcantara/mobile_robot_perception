@@ -53,8 +53,8 @@ class LaserScanProcessor {
   int angleToIndex(float _angle);
 
  private:
-  sensor_msgs::LaserScan scan_;
-  float angle_range_;
+  sensor_msgs::LaserScan scan_;  /// scan msg object to be processed.
+  float angle_range_;  /// angle range of the scan msg.
 };
 
 }; // namespace mobile_robot_perception
