@@ -44,6 +44,32 @@ TEST_F(LaserScanProcessorTest, angleToIndexTest) {
   EXPECT_EQ(-1, scan_processor_ptr_->angleToIndex(1.6));
 }
 
+TEST_F(LaserScanProcessorTest, getSectorTest) {
+  
+  mobile_robot_perception::ScanSectorMeasurements scan_sector = scan_processor_ptr_->getSector(0, 0.79);
+
+  EXPECT_EQ(0, scan_sector.getInclination());
+  EXPECT_EQ(1, scan_sector.getMax());
+
+  int ranges_pos = 42;
+  float scan = 1;
+  for (int i=0; i <= 15; i++) {
+
+    scan_.ranges[ranges_pos] = scan;
+    ranges_pos += 1;
+    scan += 0.0314;
+  }
+
+  scan_processor_ptr_ = std::unique_ptr<LaserScanProcessor> ( new LaserScanProcessor(scan_));   
+
+  scan_sector = scan_processor_ptr_->getSector(0, 0.5);
+  
+  EXPECT_NEAR(1.4396, scan_sector.getMax(), 0.0001);
+  EXPECT_EQ(1, scan_sector.getMin());
+  EXPECT_NEAR(0.785398, scan_sector.getInclination(), 0.0001);
+    
+}
+
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
