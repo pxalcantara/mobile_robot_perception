@@ -83,6 +83,17 @@ TEST_F(ScanSectorMeasurementTest, getMinTest) {
   EXPECT_FLOAT_EQ(-56.6, scanclass.getMin());
 }
 
+TEST_F(ScanSectorMeasurementTest, getSizeTest) {
+  std::vector<float> scan_measurements = {11.6, 10.4, 9, 8, 7, 6, 0.5};  
+  scanclass.setScanMeasurements(scan_measurements);
+  
+  EXPECT_EQ(7, scanclass.getSize());
+
+  scan_measurements = {1,2,3,4};
+  scanclass.setScanMeasurements(scan_measurements);
+  EXPECT_EQ(4, scanclass.getSize());
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
 

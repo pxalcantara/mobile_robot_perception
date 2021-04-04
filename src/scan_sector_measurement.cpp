@@ -34,4 +34,8 @@ void ScanSectorMeasurements::setScanMeasurements(const std::vector<float>& _scan
   scan_measurements_ = _scan_measurements;
 }
 
+unsigned int ScanSectorMeasurements::getSize() {
+  return scan_measurements_.size();
+}
+
 }; // namespace mobile_robot_perception

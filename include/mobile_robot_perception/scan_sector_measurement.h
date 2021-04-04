@@ -27,7 +27,7 @@ class ScanSectorMeasurements {
 
   float getMin();
 
-
+  unsigned int getSize();
 
   void setScanMeasurements(const std::vector<float>& _scan_measurements);
 
